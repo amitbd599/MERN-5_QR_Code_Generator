@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import toast, { Toaster } from "react-hot-toast";
 const HomeComponent = () => {
   let qrCode = JSON.parse(localStorage.getItem("qrCode")) || [];
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(null);
 
   let firstNameRef,
     lastNameRef,
@@ -231,17 +231,23 @@ const HomeComponent = () => {
           <div className="col-span-3 ">
             <div className="bg-white shadow-lg rounded-md p-[26px]">
               <h2 className="text-[26px] font-semibold">Live preview:</h2>
-              <div>
-                <img src={url} alt="" className="w-[200px]" />
-              </div>
-              <div className="pt-4">
-                <button
-                  onClick={save}
-                  className="text-white bg-theme hover:bg-theme focus:ring-4 focus:outline-none focus:ring-theme font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center   "
-                >
-                  Save QR codes
-                </button>
-              </div>
+              {!!url ? (
+                <div>
+                  <div>
+                    <img src={url} alt="" className="w-[200px]" />
+                  </div>
+                  <div className="pt-4">
+                    <button
+                      onClick={save}
+                      className="text-white bg-theme hover:bg-theme focus:ring-4 focus:outline-none focus:ring-theme font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center   "
+                    >
+                      Save QR codes
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
         </div>
